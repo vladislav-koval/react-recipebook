@@ -1,0 +1,12 @@
+.Cross {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  &:hover {
+    filter: brightness(0) saturate(100%) invert(81%) sepia(53%) saturate(560%) hue-rotate(164deg) brightness(102%) contrast(101%);
+  }
+}
