@@ -5,6 +5,7 @@ import Button from "../../components/UI/Button/Button";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 import {onChangeHandler} from "../../form/formService";
 import Cross from "../../components/UI/Cross/Cross";
+import AuthService from "../../service/authService";
 
 class Auth extends Component {
 
@@ -43,6 +44,9 @@ class Auth extends Component {
     };
 
     loginHandler = () => {
+        const username = this.state.formControls.login.value;
+        const password = this.state.formControls.password.value;
+        AuthService.authWithLoginAndPassword(username, password).then(r => console.log("r", r));
     };
 
 
