@@ -5,6 +5,7 @@ import Backdrop from "../../components/UI/Backdrop/Backdrop";
 import Input from "../../components/UI/Input/Input";
 import {onChangeHandler} from "../../form/formService";
 import Cross from "../../components/UI/Cross/Cross";
+import AuthService from "../../service/authService";
 
 class Registry extends Component {
 
@@ -79,6 +80,12 @@ class Registry extends Component {
     };
 
     registryHandler = () => {
+        const login = this.state.formControls.login.value;
+        const password = this.state.formControls.password.value;
+        const name = this.state.formControls.name.value;
+        const surname = this.state.formControls.surname.value;
+
+        AuthService.registerNewUser(login, password, name, surname).then(response => console.log(response));
     };
 
     onChangeHandler = (event, controlName) => {
