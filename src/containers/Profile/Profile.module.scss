@@ -1,0 +1,73 @@
+.Profile {
+  margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.81);
+  padding: 36px;
+
+  .ProfileInner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .avatarInner {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      max-width: 212px;
+      max-height: 212px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      margin-bottom: 15px;
+    }
+  }
+
+  .infoInner {
+    display: flex;
+    flex-grow: 1;
+    padding: 0 35px 48px;
+    flex-direction: column;
+    justify-content: space-between;
+    > div {
+      padding: 5px 5px 5px 22px;
+      border: 3px solid;
+      border-image-slice: 1;
+      border-image-source: linear-gradient(to top, #fff, rgba(0, 0, 0, 0));
+    }
+  }
+
+  .rating {
+    background: url(./love.png) no-repeat;
+    position: relative;
+    background-size: contain;
+    width: 220px;
+    height: 220px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .counter {
+      font-size: 45px;
+      position: absolute;
+      left:50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .label {
+      position: absolute;
+      top: 100%;
+    }
+  }
+
+  .profileButtons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+}

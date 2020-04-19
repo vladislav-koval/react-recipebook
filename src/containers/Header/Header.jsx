@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from "react";
 import logo from "../../assets/img/logo.png"
 import AuthService from "../../service/authService"
+import {NavLink} from "react-router-dom";
 
 class Header extends Component {
 
@@ -30,12 +31,15 @@ class Header extends Component {
                 <div className="container">
                     <div className="header__inner">
                         <div className="logo">
-                            <img src={logo} alt=""/>
+                            <NavLink to={"/"}>
+                                <img src={logo} alt=""/>
+                            </NavLink>
                         </div>
                         <nav className="main-nav">
                             <ul className="site-navigation">
                                 <li className="site-navigation__item">
-                                    <a className="site-navigation__home" aria-label="Домашняя страница" href="#"></a>
+                                    <NavLink className="site-navigation__home" to={"/profile"}>
+                                    </NavLink>
                                 </li>
                                 <li className="site-navigation__item">
                                     <a className="site-navigation__link" href="#">Поиск рецепта</a>

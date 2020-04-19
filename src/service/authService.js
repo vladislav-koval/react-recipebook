@@ -26,7 +26,7 @@ class AuthService {
     }
 
     isAuthorized = () => {
-        return true;
+        return false;
     }
 }
 
