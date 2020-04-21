@@ -2,13 +2,29 @@ import React, {Component} from "react";
 import classes from "./Profile.module.scss";
 import avatar from "../../assets/img/photo.png"
 import Button from "../../components/UI/Button/Button";
+import ProfileService from "../../service/profileService";
 
 class Profile extends Component{
     state = {
-        login: "vasya",
-        name: "Вася",
-        surname: "Петькин",
+        login: "",
+        name: "",
+        surname: "",
         rating: 100,
+    };
+
+    componentDidMount() {
+        if(!ProfileService.profileIsExists()) {
+            ProfileService.setProfileData();
+        }
+        this.setProfileData();
+    }
+
+    setProfileData = () => {
+        this.setState({
+            login: ProfileService.getUserLogin(),
+            name: ProfileService.getUserName(),
+            surname: ProfileService.getUserSurname()
+        });
     };
 
     render() {

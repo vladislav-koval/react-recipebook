@@ -65,6 +65,7 @@ class AuthService {
 
     getToken = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_TOKEN);
 
+    // TODO: deal with getusername
     getUserName = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
 
     clearLocalStorage = () => {
