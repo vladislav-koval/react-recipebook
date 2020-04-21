@@ -54,7 +54,7 @@ class Layout extends Component {
 
     render() {
         return (
-            <div>
+            <div className="mainInner">
                 <Header onAuthClick={this.onAuthHandler}
                         onRegisterClick={this.onRegisterHandler}
                         onLogoutClick={this.onLogoutHandler}
