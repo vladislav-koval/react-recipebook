@@ -1,22 +1,25 @@
 import React, {Component, Fragment} from "react";
 import logo from "../../assets/img/logo.png"
-import AuthService from "../../service/authService"
 import {NavLink} from "react-router-dom";
 
 class Header extends Component {
 
-    state = {
-        isAuth: AuthService.isAuthorized(),
-        userName: "Вася",
-    };
-
     userList() {
-        return this.state.isAuth ?
-            <Fragment>
-                <li className="user-list__item"><span>Привет {this.state.userName}</span></li>
-            </Fragment> :
+        return this.props.isAuth ?
             <Fragment>
                 <li className="user-list__item">
+                    <NavLink className="site-navigation__link" to={"/profile"}>
+                        Привет {this.props.userName}
+                    </NavLink>
+                </li>
+                <li className="user-list__item">
+                    <NavLink onClick={this.props.onLogoutClick} className="site-navigation__link" to={"/"}>
+                        Выход
+                    </NavLink>
+                </li>
+            </Fragment> :
+            <Fragment>
+                <li className="user-list__item" >
                     <span onClick={this.props.onAuthClick} className="user-list__link">Авторизация</span>
                 </li>
                 <li className="user-list__item">
@@ -37,10 +40,6 @@ class Header extends Component {
                         </div>
                         <nav className="main-nav">
                             <ul className="site-navigation">
-                                <li className="site-navigation__item">
-                                    <NavLink className="site-navigation__home" to={"/profile"}>
-                                    </NavLink>
-                                </li>
                                 <li className="site-navigation__item">
                                     <a className="site-navigation__link" href="#">Поиск рецепта</a>
                                 </li>

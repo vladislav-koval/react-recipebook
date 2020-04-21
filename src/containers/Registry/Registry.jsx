@@ -10,6 +10,8 @@ import AuthService from "../../service/authService";
 class Registry extends Component {
 
     state = {
+        errorMessage: "",
+        isError: false,
         isFormValid: false,
         formControls: {
             login: {
@@ -85,7 +87,14 @@ class Registry extends Component {
         const name = this.state.formControls.name.value;
         const surname = this.state.formControls.surname.value;
 
-        AuthService.registerNewUser(login, password, name, surname).then(response => console.log(response));
+        AuthService.executeBasicRegistryService(login, password, name, surname)
+            .then(() => {
+                this.setState({errorMessage: "", isError: false});
+                this.props.successfulAuthentication();
+            })
+            .catch((error) => {
+                this.setState({errorMessage: error.message, isError: true})
+            });
     };
 
     onChangeHandler = (event, controlName) => {
@@ -121,6 +130,11 @@ class Registry extends Component {
                 <form onSubmit={this.submitHandler} className={classes.Auth}>
                     <Cross onClick={this.props.onClick}/>
                     {this.renderInputs()}
+                    {this.state.isError &&
+                    <div className={classes.error}>
+                        {this.state.errorMessage}
+                    </div>
+                    }
                     <Button type='primary'
                             onClick={this.registryHandler}
                             disabled={!this.state.isFormValid}>Вход</Button>

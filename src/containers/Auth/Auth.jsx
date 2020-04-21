@@ -10,6 +10,8 @@ import AuthService from "../../service/authService";
 class Auth extends Component {
 
     state = {
+        errorMessage: "",
+        isError: false,
         isFormValid: false,
         formControls: {
             login: {
@@ -46,9 +48,16 @@ class Auth extends Component {
     loginHandler = () => {
         const username = this.state.formControls.login.value;
         const password = this.state.formControls.password.value;
-        AuthService.authWithLoginAndPassword(username, password).then(r => console.log("r", r));
-    };
 
+        AuthService.executeBasicAuthenticationService(username, password)
+            .then(() => {
+                this.setState({errorMessage: "", isError: false});
+                this.props.successfulAuthentication();
+            })
+            .catch((error) => {
+                this.setState({errorMessage: error.message, isError: true})
+            });
+    };
 
     onChangeHandler = (event, controlName) => {
         const {formControls, isFormValid} = onChangeHandler(event, {...this.state.formControls}, controlName);
@@ -83,6 +92,11 @@ class Auth extends Component {
                 <form onSubmit={this.submitHandler} className={classes.Auth}>
                     <Cross onClick={this.props.onClick}/>
                     {this.renderInputs()}
+                    {this.state.isError &&
+                        <div className={classes.error}>
+                            {this.state.errorMessage}
+                        </div>
+                    }
                     <Button type='primary'
                             onClick={this.loginHandler}
                             disabled={!this.state.isFormValid}>Вход</Button>
