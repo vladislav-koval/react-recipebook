@@ -1,14 +1,13 @@
 import axios from 'axios';
-import {API_URL} from "./apiConstants";
-const PROFILE_URL = `${API_URL}/profile`;
-
-// TODO: DEAL WITH CONSTANTS
-
-const USER_NAME_SESSION_ATTRIBUTE_TOKEN = 'token';
-const USER_NAME_SESSION_ATTRIBUTE_PROFILE = 'profile';
-const USER_NAME_SESSION_ATTRIBUTE_LOGIN = 'userLogin';
-const USER_NAME_SESSION_ATTRIBUTE_NAME = 'userName';
-const USER_NAME_SESSION_ATTRIBUTE_SURNAME = 'userSurname';
+import {
+    EDIT_PROFILE_URL,
+    PROFILE_URL,
+    USER_NAME_SESSION_ATTRIBUTE_LOGIN,
+    USER_NAME_SESSION_ATTRIBUTE_NAME,
+    USER_NAME_SESSION_ATTRIBUTE_PROFILE,
+    USER_NAME_SESSION_ATTRIBUTE_SURNAME,
+    USER_NAME_SESSION_ATTRIBUTE_TOKEN
+} from "./apiConstants";
 
 class ProfileService {
 
@@ -25,6 +24,16 @@ class ProfileService {
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_PROFILE, data.username);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, data.name);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_SURNAME, data.surname);
+    }
+
+    executeEditProfileService(data) {
+        return axios.post(EDIT_PROFILE_URL, data).then(response => {
+            return response.data
+        })
+            .then(data => console.log("editData", data))
+            .catch(error => {
+                throw new Error(error.response.data.error)
+            });
     }
 
     profileIsExists = () => {

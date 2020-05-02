@@ -13,9 +13,8 @@ class Profile extends Component {
         surname: "",
         rating: 100,
 
-
         isEditing: false,
-        isFormValid: true,
+        isFormValid: false,
         formControls: {...getProfileControls()},
     };
 
@@ -49,16 +48,34 @@ class Profile extends Component {
         console.log(this.state.formControls);
     };
 
-    onRejectClicked = () => {
-      this.setState({isEditing: false, isFormValid: true});
+    onRejectEditClicked = () => {
+        this.setState({isEditing: false, isFormValid: false});
+    };
+
+    onAcceptEditClicked = () => {
+        const login = this.state.formControls.login.value;
+        const name = this.state.formControls.name.value;
+        const surname = this.state.formControls.surname.value;
+        ProfileService.executeEditProfileService({login, name, surname})
+            .then(() => {
+                this.setState({login, name, surname, isFormValid: false, isEditing: false})
+            })
+            .catch(error => alert("error in Profile", error.message));
     };
 
     onChangeHandler = (event, controlName) => {
-        const {formControls, isFormValid} = onChangeHandler(event, {...this.state.formControls}, controlName);
+        let {formControls, isFormValid} = onChangeHandler(event, {...this.state.formControls}, controlName);
+        isFormValid = isFormValid && !this.isHaveChanged(formControls);
         this.setState({
             formControls,
             isFormValid
         });
+    };
+
+    isHaveChanged = (formControls) => {
+        return this.state.login === formControls.login.value &&
+            this.state.name === formControls.name.value &&
+            this.state.surname === formControls.surname.value;
     };
 
     renderInputs() {
@@ -109,8 +126,9 @@ class Profile extends Component {
                         <Button type={"dark"} disabled={this.state.isEditing}>Мои рецепты</Button>
                         {this.state.isEditing ?
                             <div className={classes.profileEditButtons}>
-                                <Button type={"error"} onClick={this.onRejectClicked}>Отмена</Button>
-                                <Button type={"success"} disabled={!this.state.isFormValid}>Сохранить</Button>
+                                <Button type={"error"} onClick={this.onRejectEditClicked}>Отмена</Button>
+                                <Button type={"success"} onClick={this.onAcceptEditClicked}
+                                        disabled={!this.state.isFormValid}>Сохранить</Button>
                             </div>
                             :
                             <Button type={"dark"} onClick={this.onEditClicked}>Редактировать профиль</Button>

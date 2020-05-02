@@ -18,11 +18,6 @@ class Auth extends Component {
         };
     }
 
-
-    componentDidMount() {
-        console.log(this.state.formControls)
-    }
-
     submitHandler = (event) => {
         event.preventDefault();
     };

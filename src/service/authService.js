@@ -1,14 +1,17 @@
 import axios from 'axios';
-import {API_URL} from "./apiConstants";
-
-const AUTH_URL = `${API_URL}/login`;
-const REGISTRATION_URL = `${API_URL}/signup`;
-
-const USER_NAME_SESSION_ATTRIBUTE_TOKEN = 'token';
-const USER_NAME_SESSION_ATTRIBUTE_ADMIN_MARKER = 'isAdmin';
-const USER_NAME_SESSION_ATTRIBUTE_NAME = 'userName';
+import {
+    AUTH_URL,
+    REGISTRATION_URL,
+    USER_NAME_SESSION_ATTRIBUTE_ADMIN_MARKER,
+    USER_NAME_SESSION_ATTRIBUTE_NAME,
+    USER_NAME_SESSION_ATTRIBUTE_TOKEN
+} from "./apiConstants";
 
 class AuthService {
+
+    constructor() {
+        this.setAuthInterceptor();
+    }
 
     executeBasicAuthenticationService(login, password) {
         return axios.post(AUTH_URL, {
@@ -18,7 +21,7 @@ class AuthService {
                 return response.data;
             })
             .then(data => {
-                this.authWithLoginAndPassword(data)
+                this.authWithLoginAndPassword(data);
             })
             .catch(error => {
                 throw new Error(error.response.data.error);
@@ -33,7 +36,7 @@ class AuthService {
                 return response.data
             })
             .then(data => {
-                this.authWithLoginAndPassword(data)
+                this.authWithLoginAndPassword(data);
             })
             .catch(error => {
                 throw new Error(error.response.data.error);
@@ -47,15 +50,32 @@ class AuthService {
         if (+data.is_user === 0) //if is_user === 0 then user is admin
             localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_ADMIN_MARKER, '.');
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, data.name);
+        this.setAuthInterceptor();
     }
 
     logout() {
         this.clearLocalStorage();
+        this.setAuthInterceptor();
     }
+
+    setAuthInterceptor() {
+        const setAuthCb = this.createSetAuthInterceptor();
+        axios.interceptors.request.use(setAuthCb);
+    };
+
 
     isAuthorized = () => {
         const user = localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
         return user !== null;
+    };
+
+    createSetAuthInterceptor = () => config => {
+        if (this.isAuthorized()) {
+            config.headers.Authorization = this.getToken();
+        } else {
+            delete config.headers.Authorization;
+        }
+        return config;
     };
 
     isAdmin = () => {
@@ -65,7 +85,6 @@ class AuthService {
 
     getToken = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_TOKEN);
 
-    // TODO: deal with getusername
     getUserName = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
 
     clearLocalStorage = () => {
