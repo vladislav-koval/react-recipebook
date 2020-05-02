@@ -10,6 +10,10 @@ const Input = props => {
     const cls = [classes.Input];
     const htmlFor = `${inputType}-${Math.random()}`;
 
+    if(props.view === "profile") {
+        cls.push(classes.Profile);
+    }
+
     if (isInvalid(props)) {
         cls.push(classes.invalid);
     }

@@ -12,8 +12,8 @@ const USER_NAME_SESSION_ATTRIBUTE_SURNAME = 'userSurname';
 
 class ProfileService {
 
-    setProfileData() {
-        axios.post(PROFILE_URL, {
+    setProfileDataFromServer() {
+        return axios.post(PROFILE_URL, {
             token: localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_TOKEN)
         })
             .then(response => this.setProfileDataToLocalStorage(response.data))
@@ -22,13 +22,14 @@ class ProfileService {
 
     setProfileDataToLocalStorage(data) {
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_LOGIN, data.username);
+        localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_PROFILE, data.username);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, data.name);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_SURNAME, data.surname);
     }
 
     profileIsExists = () => {
         const profile = localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_PROFILE);
-        return profile !== null;
+        return profile != null;
     };
 
     getUserLogin = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_LOGIN);

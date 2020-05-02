@@ -24,11 +24,19 @@
   }
 
   &.error {
-    background: rgba(240, 87, 108, 1);
+    background: rgb(240, 85, 72);
+    font-size: 25px;
+    color: #000;
+    width: 45%;
+    margin: 15px 0;
   }
 
   &.success {
     background: rgba(161, 240, 69, 1);
+    font-size: 25px;
+    color: #000;
+    width: 45%;
+    margin: 15px 0;
   }
 
   &.primary {
@@ -48,5 +56,8 @@
     background: #ccc;
     color: #000;
     cursor: not-allowed;
+    &:hover {
+      box-shadow: none;
+    }
   }
 }

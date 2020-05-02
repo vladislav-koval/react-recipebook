@@ -18,7 +18,7 @@ class Registry extends Component {
                 value: '',
                 type: '',
                 label: 'Логин',
-                errorMessage: 'Введите корректный логин',
+                errorMessage: 'Логин не может быть пустым',
                 valid: false,
                 touched: false,
                 validation: {
@@ -30,7 +30,7 @@ class Registry extends Component {
                 value: '',
                 type: 'password',
                 label: 'Пароль',
-                errorMessage: 'Введите корректный пароль',
+                errorMessage: 'Пароль может состоять минимум из 6 символов',
                 valid: false,
                 touched: false,
                 validation: {
@@ -38,23 +38,11 @@ class Registry extends Component {
                     minLength: 6,
                 }
             },
-            confirmPassword: {
-                value: '',
-                type: 'password',
-                label: 'Подтвердите пароль',
-                errorMessage: 'Пароли не совпадают',
-                valid: false,
-                touched: false,
-                validation: {
-                    required: true,
-                    confirmPass: true
-                }
-            },
             name: {
                 value: '',
                 type: 'text',
                 label: 'Имя',
-                errorMessage: 'Введите корректное имя',
+                errorMessage: 'Имя не может быть пустым',
                 valid: false,
                 touched: false,
                 validation: {
@@ -66,7 +54,7 @@ class Registry extends Component {
                 value: '',
                 type: 'text',
                 label: 'Фамилия',
-                errorMessage: 'Введите корректную фамилию',
+                errorMessage: 'Фамилия не может быть пустой',
                 valid: false,
                 touched: false,
                 validation: {

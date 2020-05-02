@@ -70,4 +70,10 @@
     flex-wrap: wrap;
   }
 
+  .profileEditButtons {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+  }
+
 }

@@ -3,43 +3,25 @@ import Input from "../../components/UI/Input/Input";
 import classes from "./Auth.module.scss";
 import Button from "../../components/UI/Button/Button";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
-import {onChangeHandler} from "../../form/formService";
+import {getLoginControls, onChangeHandler} from "../../form/formService";
 import Cross from "../../components/UI/Cross/Cross";
 import AuthService from "../../service/authService";
 
 class Auth extends Component {
+    constructor(pros) {
+        super(pros);
+        this.state = {
+            errorMessage: "",
+            isError: false,
+            isFormValid: false,
+            formControls: {...getLoginControls()},
+        };
+    }
 
-    state = {
-        errorMessage: "",
-        isError: false,
-        isFormValid: false,
-        formControls: {
-            login: {
-                value: '',
-                type: '',
-                label: 'Логин',
-                errorMessage: 'Введите корректный логин',
-                valid: false,
-                touched: false,
-                validation: {
-                    required: true,
-                    login: true,
-                }
-            },
-            password: {
-                value: '',
-                type: 'password',
-                label: 'Пароль',
-                errorMessage: 'Введите корректный пароль',
-                valid: false,
-                touched: false,
-                validation: {
-                    required: true,
-                    minLength: 6,
-                }
-            },
-        }
-    };
+
+    componentDidMount() {
+        console.log(this.state.formControls)
+    }
 
     submitHandler = (event) => {
         event.preventDefault();
@@ -93,9 +75,9 @@ class Auth extends Component {
                     <Cross onClick={this.props.onClick}/>
                     {this.renderInputs()}
                     {this.state.isError &&
-                        <div className={classes.error}>
-                            {this.state.errorMessage}
-                        </div>
+                    <div className={classes.error}>
+                        {this.state.errorMessage}
+                    </div>
                     }
                     <Button type='primary'
                             onClick={this.loginHandler}
