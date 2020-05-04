@@ -19,7 +19,7 @@ class Header extends Component {
                 </li>
             </Fragment> :
             <Fragment>
-                <li className="user-list__item" >
+                <li className="user-list__item">
                     <span onClick={this.props.onAuthClick} className="user-list__link">Авторизация</span>
                 </li>
                 <li className="user-list__item">
@@ -55,5 +55,6 @@ class Header extends Component {
         );
     }
 }
+
 
 export default Header;

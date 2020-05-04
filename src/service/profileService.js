@@ -30,7 +30,11 @@ class ProfileService {
         return axios.post(EDIT_PROFILE_URL, data).then(response => {
             return response.data
         })
-            .then(data => console.log("editData", data))
+            .then(data => {
+                this.setProfileDataToLocalStorage(data);
+                // eslint-disable-next-line no-restricted-globals
+                location.reload();
+            })
             .catch(error => {
                 throw new Error(error.response.data.error)
             });

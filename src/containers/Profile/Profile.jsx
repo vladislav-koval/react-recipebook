@@ -60,7 +60,7 @@ class Profile extends Component {
             .then(() => {
                 this.setState({login, name, surname, isFormValid: false, isEditing: false})
             })
-            .catch(error => alert("error in Profile", error.message));
+            .catch(error => console.log("error in Profile", error.message));
     };
 
     onChangeHandler = (event, controlName) => {
