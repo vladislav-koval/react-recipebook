@@ -54,6 +54,14 @@
     margin: 15px 0;
   }
 
+  &.dark-min {
+    font-size: 25px;
+    background: #F3AD2E;
+    color: #000;
+    width: 25%;
+    margin: 15px 0;
+  }
+
   &:disabled {
     background: #ccc;
     color: #000;

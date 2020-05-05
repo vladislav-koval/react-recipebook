@@ -5,10 +5,11 @@ import {getRecipeControls, getRecipeIngredientControl, onChangeHandler} from "..
 import Input from "../../components/UI/Input/Input";
 import CircledPlus from "../../components/UI/CircledPlus/CircledPlus";
 import CircledMinus from "../../components/UI/CircledMinus/CircledMinus";
+import Textarea from "../../components/UI/TextArea/Textarea";
+import Button from "../../components/UI/Button/Button";
 
 class RecipeCreator extends Component {
     state = {
-
         isFormValid: false,
         formControls: {...getRecipeControls()},
         ingredientsFields: []
@@ -95,6 +96,17 @@ class RecipeCreator extends Component {
                                 {this.renderIngredients()}
                             </div>
                         </div>
+                    </div>
+                    <div className={classes.RecipeCreatorInnerBottom}>
+                        <Textarea
+                            value={this.state.formControls.description.value}
+                            label={this.state.formControls.description.label}
+                            valid={this.state.formControls.description.valid}
+                            onChange={(event) => this.onChangeControl(event, 'description')}
+                        />
+                        <Button type='dark-min'
+                                onClick={this.loginHandler}
+                                disabled={!this.state.isFormValid}>Добавить</Button>
                     </div>
                 </div>
             </div>

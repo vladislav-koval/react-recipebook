@@ -96,6 +96,19 @@ const recipeControls = {
         }
     },
 
+    description: {
+        value: '',
+        type: 'text',
+        label: 'Описание:',
+        errorMessage: 'Описание не может быть пустым',
+        valid: false,
+        touched: false,
+        validation: {
+            required: true,
+            minLength: 1,
+        }
+    },
+
     ingredient: {
         value: '',
         type: 'text',
@@ -109,6 +122,7 @@ const recipeControls = {
 export function getRecipeControls() {
     return {
         name: recipeControls.name,
+        description: recipeControls.description
     }
 }
 
