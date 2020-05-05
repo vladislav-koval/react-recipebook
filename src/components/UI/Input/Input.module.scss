@@ -53,4 +53,60 @@
       padding: 0;
     }
   }
+
+  &.Recipe {
+    display: flex;
+    background: azure;
+    color: #000;
+    border-radius: 3px;
+    width: 90%;
+    position: relative;
+    padding: 5px 5px 5px 22px;
+
+    margin-left: 50px;
+    margin-bottom: 0;
+    font-weight: 400;
+
+    label {
+      font-weight: 400;
+      margin: 0;
+      color: #000
+    }
+
+    input {
+      font-size: 24px;
+      background: transparent;
+      border: none;
+      width: unset;
+      margin: 0;
+      padding: 0;
+    }
+    span {
+      position: absolute;
+      left: 0;
+      bottom: -20px;
+    }
+  }
+
+  &.Ingredient {
+    background: azure;
+    color: #000;
+    border-radius: 3px;
+    width: 60%;
+    position: relative;
+    padding: 5px 5px 5px 22px;
+    margin: 0;
+
+    font-weight: 400;
+    label {
+      margin: 0;
+    }
+    input {
+      font-size: 24px;
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }

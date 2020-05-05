@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from "react";
 import classes from "./Profile.module.scss";
-import avatar from "../../assets/img/photo.png"
 import Button from "../../components/UI/Button/Button";
 import ProfileService from "../../service/profileService";
 import Input from "../../components/UI/Input/Input";
 import {getProfileControls, onChangeHandler} from "../../form/formService";
 import {NavLink} from "react-router-dom";
+import Avatar from "../../components/UI/Avatar/Avatar";
 
 class Profile extends Component {
     state = {
@@ -104,10 +104,7 @@ class Profile extends Component {
             <div className="container">
                 <div className={classes.Profile}>
                     <div className={classes.ProfileInner}>
-                        <div className={classes.avatarInner}>
-                            <img src={avatar} alt="avatar"/>
-                            <span>Загрузить фото</span>
-                        </div>
+                        <Avatar />
                         <div className={classes.infoInner}>
                             {this.state.isEditing ? this.renderInputs() :
                                 <Fragment>

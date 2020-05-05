@@ -12,6 +12,8 @@ const Input = props => {
 
     if(props.view === "profile") {
         cls.push(classes.Profile);
+    } else if(props.view) {
+        cls.push(classes[props.view])
     }
 
     if (isInvalid(props)) {

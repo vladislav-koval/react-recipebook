@@ -1,4 +1,3 @@
-
 export function validateControl(validation, value) {
     if (!validation) {
         return true;
@@ -32,7 +31,7 @@ export function onChangeHandler(event, formControls, controlName) {
     return {formControls, isFormValid}
 }
 
-const formControls = {
+const authControls = {
     login: {
         value: '',
         type: 'text',
@@ -83,17 +82,51 @@ const formControls = {
     }
 };
 
+const recipeControls = {
+    name: {
+        value: '',
+        type: 'text',
+        label: 'Название рецепта',
+        errorMessage: 'Название не может быть пустым',
+        valid: false,
+        touched: false,
+        validation: {
+            required: true,
+            minLength: 1,
+        }
+    },
+
+    ingredient: {
+        value: '',
+        type: 'text',
+        label: '',
+        errorMessage: '',
+        valid: true,
+        touched: false,
+    }
+};
+
+export function getRecipeControls() {
+    return {
+        name: recipeControls.name,
+    }
+}
+
+export function getRecipeIngredientControl() {
+    return recipeControls.ingredient;
+}
+
 export function getLoginControls() {
     return {
-        login: formControls.login,
-        password: formControls.password
+        login: authControls.login,
+        password: authControls.password
     }
 }
 
 export function getProfileControls() {
     return {
-        login: {...formControls.login, valid: true},
-        name: {...formControls.name, valid: true},
-        surname: {...formControls.surname, valid: true}
+        login: {...authControls.login, valid: true},
+        name: {...authControls.name, valid: true},
+        surname: {...authControls.surname, valid: true}
     }
 }

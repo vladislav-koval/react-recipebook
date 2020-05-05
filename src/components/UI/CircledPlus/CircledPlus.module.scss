@@ -1,0 +1,26 @@
+.Circle {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+
+  .round {
+    stroke: white;
+    transition: all .2s linear;
+  }
+  .plus {
+    fill: white;
+    transition: fill .2s linear;
+  }
+  &:hover {
+    .plus {
+      fill: #8ce7ff;
+    }
+    .round {
+      stroke: #8ce7ff;
+      fill-opacity: 0.3;
+    }
+  }
+}
