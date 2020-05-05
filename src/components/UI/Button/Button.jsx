@@ -6,15 +6,17 @@ const Button = props => {
         classes.Button,
         classes[props.type],
     ];
+    const TagName = props.tag ? props.tag : "button";
     return (
-        <button
+        <TagName
+            to={props.to}
             onClick={props.onClick}
             className={cls.join(' ')}
             disabled={props.disabled}
         >
             {props.children}
-        </button>
+        </TagName>
     )
-}
+};
 
 export default Button;

@@ -5,6 +5,7 @@ import Button from "../../components/UI/Button/Button";
 import ProfileService from "../../service/profileService";
 import Input from "../../components/UI/Input/Input";
 import {getProfileControls, onChangeHandler} from "../../form/formService";
+import {NavLink} from "react-router-dom";
 
 class Profile extends Component {
     state = {
@@ -133,7 +134,9 @@ class Profile extends Component {
                             :
                             <Button type={"dark"} onClick={this.onEditClicked}>Редактировать профиль</Button>
                         }
-                        <Button type={"dark"} disabled={this.state.isEditing}>Добавить рецепт</Button>
+                        <Button to={"/recipeCreator"} tag={NavLink} type={"dark"} disabled={this.state.isEditing}>
+                            Добавить рецепт
+                        </Button>
                         <Button type={"dark"} disabled={this.state.isEditing}>Выход</Button>
                     </div>
                 </div>
