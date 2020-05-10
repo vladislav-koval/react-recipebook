@@ -33,6 +33,16 @@
     margin: 15px 0;
   }
 
+  &.successNotification {
+    background: rgba(161, 240, 69, 1);
+    color: #000;
+  }
+
+  &.errorNotification {
+    background: rgb(240, 85, 72);
+    color: #000;
+  }
+
   &.success {
     background: rgba(161, 240, 69, 1);
     font-size: 25px;
