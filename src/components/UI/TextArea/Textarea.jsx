@@ -8,9 +8,7 @@ const Textarea = props => {
     return (
         <div className={cls.join(' ')}>
             <label htmlFor="">{props.label}</label>
-            <textarea onChange={props.onChange} id={htmlFor}>
-                {props.value}
-            </textarea>
+            <textarea onChange={props.onChange} id={htmlFor} value={props.value} />
         </div>
     );
 };

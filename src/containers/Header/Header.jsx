@@ -41,7 +41,7 @@ class Header extends Component {
                         <nav className="main-nav">
                             <ul className="site-navigation">
                                 <li className="site-navigation__item">
-                                    <a className="site-navigation__link" href="#">Поиск рецепта</a>
+                                    <NavLink to={"/search"} className="site-navigation__link">Поиск рецепта</NavLink>
                                 </li>
                             </ul>
                             <ul className="user-list">

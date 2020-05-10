@@ -1,18 +1,27 @@
 import React, {Component} from "react";
 import classes from "./RecipeCreator.module.scss";
 import Avatar from "../../components/UI/Avatar/Avatar";
-import {getRecipeControls, getRecipeIngredientControl, onChangeHandler} from "../../form/formService";
+import {
+    getRecipeCategories,
+    getRecipeControls,
+    getRecipeIngredientControl,
+    onChangeHandler
+} from "../../form/formService";
 import Input from "../../components/UI/Input/Input";
 import CircledPlus from "../../components/UI/CircledPlus/CircledPlus";
 import CircledMinus from "../../components/UI/CircledMinus/CircledMinus";
 import Textarea from "../../components/UI/TextArea/Textarea";
 import Button from "../../components/UI/Button/Button";
+import Select from "../../components/UI/Select/Select";
+import RecipeService from "../../service/recipeService"
 
 class RecipeCreator extends Component {
     state = {
         isFormValid: false,
         formControls: {...getRecipeControls()},
-        ingredientsFields: []
+        ingredientFields: [],
+        recipeCategories: getRecipeCategories(),
+        category: '',
     };
 
     onChangeControl = (event, controlName) => {
@@ -23,25 +32,39 @@ class RecipeCreator extends Component {
         });
     };
 
+    onChangeCategory = (event) => {
+        const category = event.target.value;
+        this.setState({category});
+    };
+
     onChangeIngredient = (event, index) => {
-        let control = {...this.state.ingredientsFields[index]};
+        let control = {...this.state.ingredientFields[index]};
+        let ingredients = [...this.state.ingredientFields];
         control.value = event.target.value;
-        this.setState({ingredientFields: [...this.state.ingredientsFields] + [this.state.ingredientsFields[index] = control]})
-        console.log(this.state.ingredientsFields)
+        ingredients[index] = control;
+        this.setState({ingredientFields: ingredients});
     };
 
     addIngredientHandler = () => {
-        let ingredients = [...this.state.ingredientsFields];
+        let ingredients = [...this.state.ingredientFields];
         ingredients.push(getRecipeIngredientControl());
-        this.setState({ingredientsFields: ingredients});
+        this.setState({ingredientFields: ingredients});
     };
 
     removeIngredientHandler = (index) => {
-        let fields = [...this.state.ingredientsFields];
+        let fields = [...this.state.ingredientFields];
         fields.splice(index, 1);
         this.setState({
-            ingredientsFields: fields
+            ingredientFields: fields
         });
+    };
+    addRecipeHandler = () => {
+        const title = this.state.formControls.name.value;
+        const ingredients = this.state.ingredientFields.map(ingredient => ingredient.value);
+        const category = this.state.category;
+        const description = this.state.formControls.description.value;
+
+        RecipeService.postRecipe(title, ingredients, category, description);
     };
 
     renderControl(controlName) {
@@ -64,7 +87,7 @@ class RecipeCreator extends Component {
     }
 
     renderIngredients() {
-        return this.state.ingredientsFields.map((control, index) => {
+        return this.state.ingredientFields.map((control, index) => {
             return (
                 <div key={index} className={classes.IngredientAddButton}>
                     <Input
@@ -90,10 +113,16 @@ class RecipeCreator extends Component {
                         <div className={classes.RecipeNameInner}>
                             {this.renderControl("name")}
                             <div className={classes.RecipeIngredientsInner}>
-                                <div className={classes.IngredientAddButton}>Ингредиенты:
-                                    <CircledPlus onClick={this.addIngredientHandler}/>
+                                <div>
+                                    <div className={classes.IngredientAddButton}>Ингредиенты:
+                                        <CircledPlus onClick={this.addIngredientHandler}/>
+                                    </div>
+                                    {this.renderIngredients()}
                                 </div>
-                                {this.renderIngredients()}
+                                <div>
+                                    <Select onChange={(event) => this.onChangeCategory(event)} label={"Категория: "}
+                                            options={this.state.recipeCategories}/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,8 +133,9 @@ class RecipeCreator extends Component {
                             valid={this.state.formControls.description.valid}
                             onChange={(event) => this.onChangeControl(event, 'description')}
                         />
+
                         <Button type='dark-min'
-                                onClick={this.loginHandler}
+                                onClick={this.addRecipeHandler}
                                 disabled={!this.state.isFormValid}>Добавить</Button>
                     </div>
                 </div>

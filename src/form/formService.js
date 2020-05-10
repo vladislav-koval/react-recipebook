@@ -116,8 +116,47 @@ const recipeControls = {
         errorMessage: '',
         valid: true,
         touched: false,
-    }
+    },
+
+    categories: [
+        {
+            key: "firstCourse",
+            value: "Первое блюдо"
+        },
+        {
+            key: "secondCourse",
+            value: "Второе блюдо"
+        },
+        {
+            key: "snack",
+            value: "Закуска"
+        },
+        {
+            key: "salad",
+            value: "Салат"
+        },
+        {
+            key: "dessert",
+            value: "Десерт"
+        },
+        {
+            key: "doughProduct",
+            value: "Изделие из теста"
+        },
+        {
+            key: "drink",
+            value: "Напиток"
+        },
+        {
+            key: "other",
+            value: "Другое"
+        }
+    ],
 };
+
+export function getRecipeCategories() {
+    return recipeControls.categories;
+}
 
 export function getRecipeControls() {
     return {

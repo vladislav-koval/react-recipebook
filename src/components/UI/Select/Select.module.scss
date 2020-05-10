@@ -1,0 +1,28 @@
+.Select {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  select {
+    font-family: "Pattaya", sans-serif;
+    font-size: 24px;
+    color: #fff;
+    line-height: 1.3;
+    background: transparent;
+    padding: 5px;
+    border-radius: 3px;
+    margin-left: 10px;
+    &:hover {
+      border-color: #688bff;
+    }
+
+    &:focus {
+      border-color: #688bff;
+    }
+  }
+
+  option {
+    background: #000;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
