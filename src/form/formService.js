@@ -48,12 +48,12 @@ const authControls = {
         value: '',
         type: 'password',
         label: 'Пароль',
-        errorMessage: 'Пароль может состоять минимум из 6 символов',
+        errorMessage: 'Пароль может состоять минимум из 5 символов',
         valid: false,
         touched: false,
         validation: {
             required: true,
-            minLength: 6,
+            minLength: 5,
         }
     },
     name: {

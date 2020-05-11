@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react";
 import classes from "./Profile.module.scss";
 import Button from "../../components/UI/Button/Button";
 import ProfileService from "../../service/profileService";
+import AuthService from "../../service/authService";
 import Input from "../../components/UI/Input/Input";
 import {getProfileControls, onChangeHandler} from "../../form/formService";
 import {NavLink} from "react-router-dom";
@@ -13,6 +14,7 @@ class Profile extends Component {
         name: "",
         surname: "",
         rating: 100,
+        isAdmin: AuthService.isAdmin(),
 
         isEditing: false,
         isFormValid: false,
@@ -104,7 +106,7 @@ class Profile extends Component {
             <div className="container">
                 <div className={classes.Profile}>
                     <div className={classes.ProfileInner}>
-                        <Avatar />
+                        <Avatar/>
                         <div className={classes.infoInner}>
                             {this.state.isEditing ? this.renderInputs() :
                                 <Fragment>
@@ -134,7 +136,15 @@ class Profile extends Component {
                         <Button to={"/recipeCreator"} tag={NavLink} type={"dark"} disabled={this.state.isEditing}>
                             Добавить рецепт
                         </Button>
-                        <Button type={"dark"} disabled={this.state.isEditing}>Выход</Button>
+                        {this.state.isAdmin ?
+                            <Button to={"/recipe-list"}
+                                    type={"dark"}
+                                    disabled={this.state.isEditing}
+                                    tag={NavLink}>
+                                Панель администратора
+                            </Button> :
+                            null
+                        }
                     </div>
                 </div>
             </div>
