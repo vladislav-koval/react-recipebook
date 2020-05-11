@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RECIPE_PUBLICATION_URL} from "./apiConstants";
+import {RECIPE_PUBLICATION_URL, RECIPE_LIST_URL} from "./apiConstants";
 
 class RecipeService {
 
@@ -14,6 +14,15 @@ class RecipeService {
             })
     };
 
+    getRecipeList() {
+        return axios.get(RECIPE_LIST_URL + '?type=no-approved').then(response => {
+            return response.data
+        })
+            .then(data => data)
+            .catch(error => {
+                throw new Error(error.response.data.error)
+            })
+    }
 }
 
 export default new RecipeService();

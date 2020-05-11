@@ -2,10 +2,24 @@ import React, {Component} from "react";
 import classes from "./RecipeList.module.scss";
 import {NavLink} from "react-router-dom";
 import RecipeItemList from "../../components/RecipeItemList/RecipeItemList";
+import Loader from "../../components/UI/Loader/Loader";
 
 class RecipeList extends Component {
     state = {
-        recipes: [
+        recipes: [],
+        loading: true
+    };
+
+    componentDidMount() {
+        // const recipes = RecipeService.getRecipeList()
+        //     .then(data => console.log(data))
+        //     .catch(error => console.log("errrr", error.message));
+        //
+        // this.setState({
+        //     recipes
+        // })
+
+        const recipes = [
             {
                 id: 1,
                 title: "Название 1",
@@ -21,8 +35,12 @@ class RecipeList extends Component {
                 title: "Название 3",
                 ingredients: ["Ингредиент 2", "Ингредиент 3", "Ингредиент 4"]
             }
-        ]
-    };
+        ];
+        this.setState({
+            recipes,
+            loading: false
+        })
+    }
 
     renderRecipes() {
         return this.state.recipes.map((recipe => {
@@ -40,7 +58,10 @@ class RecipeList extends Component {
         return (
             <div className="container">
                 <div className={classes.RecipeList}>
-                    {this.renderRecipes()}
+                    {this.state.loading && this.state.recipes !== 0 ?
+                        <Loader/> :
+                        this.renderRecipes()
+                    }
                 </div>
             </div>
         );
