@@ -72,7 +72,9 @@
     margin: 15px 0;
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
     background: #ccc;
     color: #000;
     cursor: not-allowed;

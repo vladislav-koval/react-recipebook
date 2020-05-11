@@ -6,6 +6,9 @@ const Button = props => {
         classes.Button,
         classes[props.type],
     ];
+    if (props.disabled) {
+        cls.push(classes.disabled);
+    }
     const TagName = props.tag ? props.tag : "button";
     return (
         <TagName
