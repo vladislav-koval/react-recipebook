@@ -3,6 +3,7 @@ import classes from "./RecipeList.module.scss";
 import {NavLink} from "react-router-dom";
 import RecipeItemList from "../../components/RecipeItemList/RecipeItemList";
 import Loader from "../../components/UI/Loader/Loader";
+import RecipeService from "../../service/recipeService";
 
 class RecipeList extends Component {
     state = {
@@ -11,35 +12,14 @@ class RecipeList extends Component {
     };
 
     componentDidMount() {
-        // const recipes = RecipeService.getRecipeList()
-        //     .then(data => console.log(data))
-        //     .catch(error => console.log("errrr", error.message));
-        //
-        // this.setState({
-        //     recipes
-        // })
-
-        const recipes = [
-            {
-                id: 1,
-                title: "Название 1",
-                ingredients: ["Ингредиент 1", "Ингредиент 2", "Ингредиент 3", "Ингредиент 4"]
-            },
-            {
-                id: 2,
-                title: "Название 2",
-                ingredients: ["Ингредиент 3", "Ингредиент 4"]
-            },
-            {
-                id: 3,
-                title: "Название 3",
-                ingredients: ["Ингредиент 2", "Ингредиент 3", "Ингредиент 4"]
-            }
-        ];
-        this.setState({
-            recipes,
-            loading: false
-        })
+        RecipeService.getRecipeList()
+            .then(data => {
+               const recipes = data.map(recipe => {
+                    return {...recipe, ingredients: JSON.parse(recipe.ingredients)}
+                });
+                this.setState({recipes, loading: false});
+            })
+            .catch(error => console.log("errrr", error.message));
     }
 
     renderRecipes() {
