@@ -20,7 +20,6 @@ class RecipeService {
                 type: 'not-approved'
             }
         }).then(response => {
-            console.log(response);
             return response.data
         })
             .then(data => data)
