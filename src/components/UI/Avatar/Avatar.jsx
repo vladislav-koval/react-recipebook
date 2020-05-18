@@ -6,7 +6,7 @@ const Avatar = props => {
   return (
       <div className={classes.avatarInner}>
           <img src={avatar} alt="avatar"/>
-          <span>Загрузить фото</span>
+          {props.edited ? <span>Загрузить фото</span> : null}
       </div>
   );
 };

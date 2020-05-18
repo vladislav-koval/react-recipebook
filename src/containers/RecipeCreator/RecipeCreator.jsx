@@ -22,7 +22,7 @@ class RecipeCreator extends Component {
         formControls: {...getRecipeControls()},
         ingredientFields: [],
         recipeCategories: getRecipeCategories(),
-        category: "other",
+        category: "firstCourse",
 
         notificationTitle: '',
         notificationText: '',
@@ -156,7 +156,7 @@ class RecipeCreator extends Component {
                 <div className="container">
                     <div className={classes.RecipeCreator}>
                         <div className={classes.RecipeCreatorInner}>
-                            <Avatar/>
+                            <Avatar edited={true}/>
                             <div className={classes.RecipeNameInner}>
                                 {this.renderControl("name")}
                                 <div className={classes.RecipeIngredientsInner}>

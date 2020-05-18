@@ -27,7 +27,6 @@ class Profile extends Component {
         } else {
             this.setProfileData();
         }
-        console.log("componentDidMount", this.state.formControls);
     }
 
     setProfileData() {
@@ -106,7 +105,7 @@ class Profile extends Component {
             <div className="container">
                 <div className={classes.Profile}>
                     <div className={classes.ProfileInner}>
-                        <Avatar/>
+                        <Avatar edited={true}/>
                         <div className={classes.infoInner}>
                             {this.state.isEditing ? this.renderInputs() :
                                 <Fragment>
