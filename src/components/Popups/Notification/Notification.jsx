@@ -11,16 +11,16 @@ const Notification = props => {
     ];
     const buttonType = props.type ? props.type : "successNotification";
 
-    const defaultTitle = 'Уведомление';
-    const defaultText = 'Рецепт успешно создан и ожидает проверки администратора!';
+    const title = props.title ? props.title : 'Уведомление';
+    const text = props.text ? props.text : 'Рецепт успешно создан и ожидает проверки администратора!';
 
     return (
         <Fragment>
             <div className={cls.join(' ')}>
                 <Cross onClick={props.onClick}/>
                 <div className={classes.topContainer}>
-                    <h2>{props.title ? props.title : defaultTitle}</h2>
-                    <p>{props.text ? props.text : defaultText}</p>
+                    <h2>{title}</h2>
+                    <p>{text}</p>
                 </div>
                 <div>
                     <Button type={buttonType} onClick={props.onClick}>ОК</Button>

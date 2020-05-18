@@ -2,8 +2,10 @@ import React, {Component, Fragment} from "react";
 import classes from "./RecipeItem.module.scss"
 import Avatar from "../../components/UI/Avatar/Avatar";
 import Loader from "../../components/UI/Loader/Loader";
-import AuthService from "../../service/authService";
 import Button from "../../components/UI/Button/Button";
+import AuthService from "../../service/authService";
+import Confirmation from "../../components/Popups/Confirmation/Confirmation";
+
 
 // import RecipeService from "../../service/recipeService";
 
@@ -23,6 +25,9 @@ class RecipeItem extends Component {
             picture: null
         },
         isAdmin: AuthService.isAdmin(),
+
+        showConfirmation: false,
+        confirmationTitle: "Укажите причину"
     };
 
 
@@ -39,11 +44,20 @@ class RecipeItem extends Component {
     //         .catch(error => console.log("errrr", error.message));
     // }
 
-    onSuccessClick = (event) => {
-        event.preventDefault();
+    onSuccessClick = (reason) => {
+        console.log("ОК", reason)
     };
-    onRejectClick = (event) => {
-        event.preventDefault();
+
+    onRejectClick = () => {
+        this.setState({
+            showConfirmation: true
+        })
+    };
+
+    onClickNotification = () => {
+        this.setState({
+            showConfirmation: !this.state.showConfirmation
+        })
     };
 
     renderIngredients() {
@@ -53,50 +67,59 @@ class RecipeItem extends Component {
     }
 
     render() {
-        console.log("asdf", this.state.id);
         return (
-            <div className="container">
-                <div className={classes.RecipeItem}>
-                    {this.state.loading && !this.state.recipe ?
-                        <Loader/> :
-                        <Fragment>
-                            <div className={classes.RecipeItemInner}>
+            <Fragment>
+                {this.state.showConfirmation ?
+                    <Confirmation
+                        onOkClick={this.onRejectClick}
+                        onCancelClick={this.onClickNotification}
+                        title={this.state.confirmationTitle}
+                    />
+                    : null
+                }
+                <div className="container">
+                    <div className={classes.RecipeItem}>
+                        {this.state.loading && !this.state.recipe ?
+                            <Loader/> :
+                            <Fragment>
+                                <div className={classes.RecipeItemInner}>
 
-                                <Avatar edited={false}/>
-                                <div className={classes.recipeTopLeftBlock}>
-                                    <h2>
-                                        {this.state.recipe.title}
-                                    </h2>
-                                    <p>Состав:</p>
-                                    <ul className={classes.IngredientsInner}>
-                                        {this.renderIngredients()}
-                                    </ul>
-                                </div>
-                                <div className={classes.recipeTopRightBlock}>
-                                    <div>Автор: {this.state.recipe.author}</div>
-                                    <div className={classes.rating}>
-                                        <span className={classes.counter}>{this.state.recipe.rating}</span>
+                                    <Avatar edited={false}/>
+                                    <div className={classes.recipeTopLeftBlock}>
+                                        <h2>
+                                            {this.state.recipe.title}
+                                        </h2>
+                                        <p>Состав:</p>
+                                        <ul className={classes.IngredientsInner}>
+                                            {this.renderIngredients()}
+                                        </ul>
+                                    </div>
+                                    <div className={classes.recipeTopRightBlock}>
+                                        <div>Автор: {this.state.recipe.author}</div>
+                                        <div className={classes.rating}>
+                                            <span className={classes.counter}>{this.state.recipe.rating}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <h2 className={classes.recipeHeading}>Рецепт:</h2>
-                                <p>
-                                    {this.state.recipe.description}
-                                </p>
-                            </div>
-                            {
-                                this.state.isAdmin ?
-                                    <div className={classes.buttonsContainer}>
-                                        <Button type={"success"} onClick={this.onSuccessClick}>Принять</Button>
-                                        <Button type={"error"} onClick={this.onRejectClick}>Отклонить</Button>
-                                    </div>
-                                    : null
-                            }
-                        </Fragment>
-                    }
+                                <div>
+                                    <h2 className={classes.recipeHeading}>Рецепт:</h2>
+                                    <p>
+                                        {this.state.recipe.description}
+                                    </p>
+                                </div>
+                                {
+                                    this.state.isAdmin ?
+                                        <div className={classes.buttonsContainer}>
+                                            <Button type={"success"} onClick={this.onSuccessClick}>Принять</Button>
+                                            <Button type={"error"} onClick={this.onClickNotification}>Отклонить</Button>
+                                        </div>
+                                        : null
+                                }
+                            </Fragment>
+                        }
+                    </div>
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }
