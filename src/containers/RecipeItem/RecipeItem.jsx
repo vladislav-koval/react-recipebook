@@ -5,6 +5,7 @@ import Loader from "../../components/UI/Loader/Loader";
 import Button from "../../components/UI/Button/Button";
 import AuthService from "../../service/authService";
 import Confirmation from "../../components/Popups/Confirmation/Confirmation";
+import RecipeService from "../../service/recipeService";
 
 
 // import RecipeService from "../../service/recipeService";
@@ -44,14 +45,25 @@ class RecipeItem extends Component {
     //         .catch(error => console.log("errrr", error.message));
     // }
 
-    onSuccessClick = (reason) => {
-        console.log("ОК", reason)
+    onSuccessClick = () => {
+        // const message = "Ваш рецепт прошел нашу строгую проверку! Поздравляем!";
+        const message = "Your recipe has passed our rigorous test! Congratulations!";
+        RecipeService.markRecipe(this.state.id, 1, message)
+            .then(data => {
+                this.props.history.push('/recipe-list');
+            })
+            .catch(error => console.log("errr", error.message));
     };
 
-    onRejectClick = () => {
-        this.setState({
-            showConfirmation: true
-        })
+    onRejectClick = (reason) => {
+        RecipeService.markRecipe(this.state.id, -1, reason)
+            .then(data => {
+                this.setState({
+                    showConfirmation: true
+                });
+                this.props.history.push('/recipe-list');
+            })
+            .catch(error => console.log("errr", error.message));
     };
 
     onClickNotification = () => {

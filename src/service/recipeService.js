@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RECIPE_LIST_URL, RECIPE_PUBLICATION_URL, RECIPE_URL} from "./apiConstants";
+import {RECIPE_LIST_URL, RECIPE_MARK_URL, RECIPE_PUBLICATION_URL, RECIPE_URL} from "./apiConstants";
 
 class RecipeService {
 
@@ -42,6 +42,18 @@ class RecipeService {
             .catch(error => {
                 throw new Error(error.response.data.error)
             })
+    }
+
+    markRecipe(id, mark, message) {
+        return axios.post(RECIPE_MARK_URL, {id, mark, message})
+            .then(response => {
+                return response.data
+            })
+            .then(data => data)
+            .catch(error => {
+              throw new Error(error.response.data.error)
+            });
+
     }
 }
 
