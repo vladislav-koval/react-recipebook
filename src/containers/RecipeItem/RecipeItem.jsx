@@ -47,8 +47,9 @@ class RecipeItem extends Component {
 
     onSuccessClick = () => {
         // const message = "Ваш рецепт прошел нашу строгую проверку! Поздравляем!";
+        const title="Ваш рецепт принят!";
         const message = "Your recipe has passed our rigorous test! Congratulations!";
-        RecipeService.markRecipe(this.state.id, 1, message)
+        RecipeService.markRecipe(this.state.id, 1, title, message)
             .then(data => {
                 this.props.history.push('/recipe-list');
             })
@@ -56,7 +57,8 @@ class RecipeItem extends Component {
     };
 
     onRejectClick = (reason) => {
-        RecipeService.markRecipe(this.state.id, -1, reason)
+        const title = "Unfortunately the recipe did not pass the test :(";
+        RecipeService.markRecipe(this.state.id, -1, title, reason,)
             .then(data => {
                 this.setState({
                     showConfirmation: true

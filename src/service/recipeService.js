@@ -44,8 +44,8 @@ class RecipeService {
             })
     }
 
-    markRecipe(id, mark, message) {
-        return axios.post(RECIPE_MARK_URL, {id, mark, message})
+    markRecipe(id, mark, title, message) {
+        return axios.post(RECIPE_MARK_URL, {id, mark, title, message})
             .then(response => {
                 return response.data
             })
