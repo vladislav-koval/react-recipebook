@@ -1,0 +1,63 @@
+.RecipeItem {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.81);
+  padding: 36px;
+
+  .RecipeItemInner {
+    display: flex;
+  }
+
+  .IngredientsInner {
+    padding: 0;
+    list-style: none;
+  }
+
+  .recipeTopLeftBlock {
+    margin-left: 28px;
+  }
+
+  .recipeHeading {
+    margin-bottom: 18px;
+  }
+
+  h2 {
+    font-weight: 400;
+  }
+
+  .recipeTopRightBlock {
+    margin-left: auto;
+    margin-right: 30px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .rating {
+    background: url(./love.png) no-repeat;
+    position: relative;
+    background-size: contain;
+    width: 120px;
+    height: 115px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    .counter {
+      font-size: 30px;
+      position: absolute;
+      left:50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+}

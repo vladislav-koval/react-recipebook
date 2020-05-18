@@ -5,6 +5,7 @@ import Profile from "./containers/Profile/Profile"
 import {Route, Switch} from "react-router";
 import RecipeCreator from "./containers/RecipeCreator/RecipeCreator";
 import RecipeList from "./containers/RecipeList/RecipeList";
+import RecipeItem from "./containers/RecipeItem/RecipeItem";
 
 class App extends Component {
     render() {
@@ -15,6 +16,7 @@ class App extends Component {
                     <Route path="/profile" component={Profile}/>
                     <Route path="/recipeCreator" component={RecipeCreator}/>
                     <Route path="/recipe-list" component={RecipeList}/>
+                    <Route path="/recipe/:id" component={RecipeItem}/>
                 </Switch>
             </Layout>
         );
