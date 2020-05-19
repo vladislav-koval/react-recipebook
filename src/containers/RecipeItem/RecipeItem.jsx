@@ -21,7 +21,6 @@ class RecipeItem extends Component {
     };
 
 
-    /*TODO: После того как появится запрос у бэка, раскоментить закоменченое и установить recipe = null в state*/
     componentDidMount() {
         RecipeService.getRecipe(this.state.id)
             .then(data => {
@@ -40,7 +39,7 @@ class RecipeItem extends Component {
 
     onSuccessClick = () => {
         // const message = "Ваш рецепт прошел нашу строгую проверку! Поздравляем!";
-        const title="Ваш рецепт принят!";
+        const title = "Ваш рецепт принят!";
         const message = "Your recipe has passed our rigorous test! Congratulations!";
         RecipeService.markRecipe(this.state.id, 1, title, message)
             .then(data => {
