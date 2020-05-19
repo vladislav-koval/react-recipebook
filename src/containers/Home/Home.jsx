@@ -8,6 +8,7 @@ import img5 from "../../assets/img/5.png"
 import img6 from "../../assets/img/6.png"
 import img7 from "../../assets/img/7.png"
 import img8 from "../../assets/img/8.png"
+import {NavLink} from "react-router-dom";
 
 class Home extends Component{
     render() {
@@ -15,52 +16,52 @@ class Home extends Component{
             <div className="container">
                 <ul className="main-list">
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/firstCourse"} className="main-list__link">
                             <Image src={img1} alt={"lflf"}/>
                             <span>Первые блюда</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/secondCourse"} className="main-list__link">
                             <Image src={img2} alt={"lflf"}/>
                             <span>Вторые блюда</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/snack"} className="main-list__link">
                             <Image src={img3} alt={"lflf"}/>
                             <span>Закуски</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/salad"} className="main-list__link">
                             <Image src={img4} alt={"lflf"}/>
                             <span>Салаты</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/dessert"} className="main-list__link">
                             <Image src={img5} alt={"lflf"}/>
                             <span>Десерты</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/doughProduct"} className="main-list__link">
                             <Image src={img6} alt={"lflf"}/>
                             <span>Изделия из теста</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/drink"} className="main-list__link">
                             <Image src={img7} alt={"lflf"}/>
                             <span>Напитки</span>
-                        </a>
+                        </NavLink>
                     </li>
                     <li className="main-list__item">
-                        <a href="" className="main-list__link">
+                        <NavLink to={"/category/other"} className="main-list__link">
                             <Image src={img8} alt={"lflf"}/>
                             <span>Другие</span>
-                        </a>
+                        </NavLink>
                     </li>
                 </ul>
             </div>

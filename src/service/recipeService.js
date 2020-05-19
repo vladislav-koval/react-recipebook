@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {RECIPE_LIST_URL, RECIPE_MARK_URL, RECIPE_PUBLICATION_URL, RECIPE_URL} from "./apiConstants";
+import {RECIPE_LIST_BY_TYPE_URL, RECIPE_LIST_BY_CATEGORY_URL, RECIPE_MARK_URL, RECIPE_PUBLICATION_URL, RECIPE_URL} from "./apiConstants";
 
 class RecipeService {
 
@@ -23,7 +23,7 @@ class RecipeService {
     }
 
     getListByType(type) {
-        return axios.get(RECIPE_LIST_URL, {
+        return axios.get(RECIPE_LIST_BY_TYPE_URL, {
             params: {
                 type: type
             }
@@ -38,7 +38,18 @@ class RecipeService {
     }
 
     getListByCategory(category) {
-
+        return axios.get(RECIPE_LIST_BY_CATEGORY_URL, {
+            params: {
+                category: category
+            }
+        })
+            .then(response => {
+                return response.data
+            })
+            .then(data => data)
+            .catch(error => {
+                throw new Error(error.response.data.error)
+            })
     }
 
     getRecipe(id) {

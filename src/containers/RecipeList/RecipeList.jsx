@@ -18,7 +18,6 @@ class RecipeList extends Component {
     };
 
     componentDidMount() {
-        console.log("qqq", this.state.category);
         RecipeService.getRecipeList(this.state.listCriterion)
             .then(data => {
                 let recipes;
