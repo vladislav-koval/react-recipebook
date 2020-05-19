@@ -6,6 +6,7 @@ import Button from "../../components/UI/Button/Button";
 import AuthService from "../../service/authService";
 import Confirmation from "../../components/Popups/Confirmation/Confirmation";
 import RecipeService from "../../service/recipeService";
+import {getRecipeCategories} from "../../form/formService";
 
 class RecipeItem extends Component {
 
@@ -22,6 +23,7 @@ class RecipeItem extends Component {
 
 
     componentDidMount() {
+        console.log(this.props);
         RecipeService.getRecipe(this.state.id)
             .then(data => {
                 const response = data[0];
@@ -38,11 +40,13 @@ class RecipeItem extends Component {
 
     onSuccessClick = () => {
         // const message = "Ваш рецепт прошел нашу строгую проверку! Поздравляем!";
-        const title = "Ваш рецепт принят!";
+        // const title = "Ваш рецепт принят!";
+        const title_notif = "Your recipe is accepted!";
+        const title_recipe = this.state.recipe.title;
         const message = "Your recipe has passed our rigorous test! Congratulations!";
-        RecipeService.markRecipe(this.state.id, 1, title, message)
+        RecipeService.markRecipe(this.state.id, 1, title_notif, title_recipe, message)
             .then(data => {
-                this.props.history.push('/recipe-list');
+                this.props.history.push('/recipe-list/not-approved');
             })
             .catch(error => console.log("errr", error.message));
     };
@@ -54,7 +58,7 @@ class RecipeItem extends Component {
                 this.setState({
                     showConfirmation: true
                 });
-                this.props.history.push('/recipe-list');
+                this.props.history.push('/recipe-list/not-approved');
             })
             .catch(error => console.log("errr", error.message));
     };
@@ -71,7 +75,15 @@ class RecipeItem extends Component {
         });
     }
 
+    renderCategory() {
+        const categories = getRecipeCategories();
+        const recipeCategory = categories.find(item => item.key === this.state.recipe.category);
+
+        return <div>{"Категория: " + recipeCategory.value}</div>
+    }
+
     render() {
+
         return (
             <Fragment>
                 {this.state.showConfirmation ?
@@ -94,11 +106,13 @@ class RecipeItem extends Component {
                                         <h2>
                                             {this.state.recipe.title}
                                         </h2>
+                                        {this.renderCategory()}
                                         <p>Состав:</p>
                                         <ul className={classes.IngredientsInner}>
                                             {this.renderIngredients()}
                                         </ul>
                                     </div>
+
                                     <div className={classes.recipeTopRightBlock}>
                                         <div>Автор: {this.state.recipe.author}</div>
                                         <div className={classes.rating}>

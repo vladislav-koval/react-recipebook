@@ -10,14 +10,16 @@ class RecipeList extends Component {
     state = {
         recipes: null,
         loading: true,
-
-        type: this.props.match.params.type,
         isAdmin: AuthService.isAdmin(),
-        showConfirmButtons: false
+        listCriterion: {
+            type: this.props.match.params.type,
+            category: this.props.match.params.category,
+        }
     };
 
     componentDidMount() {
-        RecipeService.getRecipeList(this.state.type)
+        console.log("qqq", this.state.category);
+        RecipeService.getRecipeList(this.state.listCriterion)
             .then(data => {
                 let recipes;
                 if (data) {
@@ -27,8 +29,7 @@ class RecipeList extends Component {
                 } else {
                     recipes = [];
                 }
-                const showConfirmButtons = this.state.type === 'not-approved' && this.state.isAdmin;
-                this.setState({recipes, loading: false, showConfirmButtons});
+                this.setState({recipes, loading: false});
             })
             .catch(error => console.log("errrr", error.message));
     }
@@ -39,7 +40,7 @@ class RecipeList extends Component {
                 return (
                     <li key={recipe.id} className={classes.RecipeItem}>
                         <NavLink to={'/recipe/' + recipe.id}>
-                            <RecipeItemList showConfirmButtons={this.state.showConfirmButtons} recipe={recipe}/>
+                            <RecipeItemList type={this.state.listCriterion.type} recipe={recipe}/>
                         </NavLink>
                     </li>
                 );

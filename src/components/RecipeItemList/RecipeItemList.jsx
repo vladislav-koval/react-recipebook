@@ -1,10 +1,10 @@
 import React from "react";
 import classes from "./RecipeItemList.module.scss";
 import Image from "../UI/Image/Image";
-import Button from "../UI/Button/Button";
+import {getRecipeCategories} from "../../form/formService"
 
 function renderIngredients(ingredients) {
-    return ingredients.slice(0, 3).map((ingredient, index) => {
+    return ingredients.slice(0, 2).map((ingredient, index) => {
         return (
             <li className={classes.IngredientItem} key={index}>
                 {ingredient}
@@ -13,36 +13,37 @@ function renderIngredients(ingredients) {
     })
 }
 
-const onSuccessClick = (event) => {
-    event.preventDefault();
-};
-const onRejectClick = (event) => {
-    event.preventDefault();
-};
 const RecipeItemList = props => {
-
+    const categories = getRecipeCategories();
+    const recipeCategory = categories.find(item => item.key === props.recipe.category);
     return (
         <div className={classes.Recipe}>
-            <Image/>
-            <div>
-                <h2>{props.recipe.title}</h2>
-                <ul>
-                    <li className={classes.IngredientItem}>Состав:</li>
-                    {renderIngredients(props.recipe.ingredients)}
-                    {
-                        props.recipe.ingredients.length > 3 ?
-                            <li className={classes.IngredientItem + ' ' + classes.dots}>...</li> :
-                            null
-                    }
-                </ul>
-            </div>
-            {
-                props.showConfirmButtons ?
-                    <div className={classes.ButtonsContainer}>
-                        <Button type={"success"} onClick={onSuccessClick}>Принять</Button>
-                        <Button type={"error"} onClick={onRejectClick}>Отклонить</Button>
+            <div className={classes.leftBlock}>
+                <Image/>
+                <div>
+                    <h2>{props.recipe.title}</h2>
+                    <div className={classes.category}>
+                        {"Категория: " + recipeCategory.value}
                     </div>
-                    : null
+                    <ul>
+                        <li className={classes.IngredientItem}>Состав:</li>
+                        {renderIngredients(props.recipe.ingredients)}
+                        {
+                            props.recipe.ingredients.length > 2 ?
+                                <li className={classes.IngredientItem + ' ' + classes.dots}>...</li> :
+                                null
+                        }
+                    </ul>
+
+                </div>
+
+            </div>
+
+            {
+                <div className={classes.status}>
+                    {props.type === "my-recipes" && props.recipe.is_approved === 0 ?
+                        "Ожидает одобрения" : null}
+                </div>
             }
 
         </div>

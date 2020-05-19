@@ -14,7 +14,15 @@ class RecipeService {
             })
     };
 
-    getRecipeList(type) {
+    getRecipeList(listCriterion) {
+        if(listCriterion.type) {
+            return this.getListByType(listCriterion.type);
+        } else if(listCriterion.category) {
+            return this.getListByCategory(listCriterion.category);
+        }
+    }
+
+    getListByType(type) {
         return axios.get(RECIPE_LIST_URL, {
             params: {
                 type: type
@@ -27,6 +35,10 @@ class RecipeService {
             .catch(error => {
                 throw new Error(error.response.data.error)
             })
+    }
+
+    getListByCategory(category) {
+
     }
 
     getRecipe(id) {
@@ -44,14 +56,14 @@ class RecipeService {
             })
     }
 
-    markRecipe(id, mark, title, message) {
-        return axios.post(RECIPE_MARK_URL, {id, mark, title, message})
+    markRecipe(id, mark, title_notif, title_recipe, message) {
+        return axios.post(RECIPE_MARK_URL, {id, mark, title_notif, title_recipe, message})
             .then(response => {
                 return response.data
             })
             .then(data => data)
             .catch(error => {
-              throw new Error(error.response.data.error)
+                throw new Error(error.response.data.error)
             });
 
     }
