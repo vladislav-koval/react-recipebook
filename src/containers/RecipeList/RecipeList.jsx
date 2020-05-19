@@ -7,38 +7,47 @@ import RecipeService from "../../service/recipeService";
 
 class RecipeList extends Component {
     state = {
-        recipes: [],
+        recipes: null,
         loading: true
     };
 
     componentDidMount() {
         RecipeService.getRecipeList()
             .then(data => {
-               const recipes = data.map(recipe => {
-                    return {...recipe, ingredients: JSON.parse(recipe.ingredients)}
-                });
+                let recipes;
+                if (data) {
+                    recipes = data.map(recipe => {
+                        return {...recipe, ingredients: JSON.parse(recipe.ingredients)}
+                    });
+                } else {
+                    recipes = [];
+                }
                 this.setState({recipes, loading: false});
             })
             .catch(error => console.log("errrr", error.message));
     }
 
     renderRecipes() {
-        return this.state.recipes.map((recipe => {
-            return (
-                <li key={recipe.id} className={classes.RecipeItem}>
-                    <NavLink to={'/recipe/' + recipe.id}>
-                        <RecipeItemList recipe={recipe}/>
-                    </NavLink>
-                </li>
-            );
-        }))
+        if (this.state.recipes.length) {
+            return this.state.recipes.map((recipe => {
+                return (
+                    <li key={recipe.id} className={classes.RecipeItem}>
+                        <NavLink to={'/recipe/' + recipe.id}>
+                            <RecipeItemList recipe={recipe}/>
+                        </NavLink>
+                    </li>
+                );
+            }))
+        } else {
+            return <div className={classes.empty}>Список пуст</div>
+        }
     }
 
     render() {
         return (
             <div className="container">
                 <div className={classes.RecipeList}>
-                    {this.state.loading && this.state.recipes !== 0 ?
+                    {this.state.loading && this.state.recipes === null ?
                         <Loader/> :
                         this.renderRecipes()
                     }
