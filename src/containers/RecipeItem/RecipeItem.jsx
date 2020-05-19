@@ -7,25 +7,14 @@ import AuthService from "../../service/authService";
 import Confirmation from "../../components/Popups/Confirmation/Confirmation";
 import RecipeService from "../../service/recipeService";
 
-
-// import RecipeService from "../../service/recipeService";
-
 class RecipeItem extends Component {
 
     state = {
         id: this.props.match.params.id,
         loading: true,
-        recipe: {
-            title: "Kartoha gharenaya",
-            category: "secondCourse",
-            ingredients: ["kartoha", "sol'", "maslo"],
-            description: "Hharish kartohu & vse",
-            author: "admin",
-            is_approved: 0,
-            rating: 100,
-            picture: null
-        },
+        recipe: null,
         isAdmin: AuthService.isAdmin(),
+        needToConfirm: false,
 
         showConfirmation: false,
         confirmationTitle: "Укажите причину"
@@ -33,17 +22,21 @@ class RecipeItem extends Component {
 
 
     /*TODO: После того как появится запрос у бэка, раскоментить закоменченое и установить recipe = null в state*/
-    // componentDidMount() {
-    //     RecipeService.getRecipe(this.state.id)
-    //         .then(data => {
-    //             const recipe = {...data, ingredients: JSON.parse(data.ingredients)};
-    //             this.setState({
-    //                 recipe,
-    //                 loading: false
-    //             });
-    //         })
-    //         .catch(error => console.log("errrr", error.message));
-    // }
+    componentDidMount() {
+        RecipeService.getRecipe(this.state.id)
+            .then(data => {
+                const response = data[0];
+                const recipe = {...response, ingredients: JSON.parse(response.ingredients)};
+                const needToConfirm = this.state.isAdmin && recipe.is_approved === 0;
+                this.setState({
+                    recipe,
+                    loading: false,
+                    needToConfirm,
+                });
+                console.log(this.state.recipe)
+            })
+            .catch(error => console.log("errrr", error.message));
+    }
 
     onSuccessClick = () => {
         // const message = "Ваш рецепт прошел нашу строгую проверку! Поздравляем!";
@@ -122,7 +115,7 @@ class RecipeItem extends Component {
                                     </p>
                                 </div>
                                 {
-                                    this.state.isAdmin ?
+                                    this.state.needToConfirm ?
                                         <div className={classes.buttonsContainer}>
                                             <Button type={"success"} onClick={this.onSuccessClick}>Принять</Button>
                                             <Button type={"error"} onClick={this.onClickNotification}>Отклонить</Button>

@@ -4,9 +4,9 @@ import Image from "../UI/Image/Image";
 import Button from "../UI/Button/Button";
 
 function renderIngredients(ingredients) {
-    return ingredients.slice(0, 3).map(ingredient => {
+    return ingredients.slice(0, 3).map((ingredient, index) => {
         return (
-            <li className={classes.IngredientItem} key={ingredient}>
+            <li className={classes.IngredientItem} key={index}>
                 {ingredient}
             </li>
         );
