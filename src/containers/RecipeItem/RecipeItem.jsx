@@ -32,7 +32,6 @@ class RecipeItem extends Component {
                     loading: false,
                     needToConfirm,
                 });
-                console.log(this.state.recipe)
             })
             .catch(error => console.log("errrr", error.message));
     }
