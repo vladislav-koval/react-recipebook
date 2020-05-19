@@ -36,10 +36,15 @@ const RecipeItemList = props => {
                     }
                 </ul>
             </div>
-            <div className={classes.ButtonsContainer}>
-                <Button type={"success"} onClick={onSuccessClick}>Принять</Button>
-                <Button type={"error"} onClick={onRejectClick}>Отклонить</Button>
-            </div>
+            {
+                props.showConfirmButtons ?
+                    <div className={classes.ButtonsContainer}>
+                        <Button type={"success"} onClick={onSuccessClick}>Принять</Button>
+                        <Button type={"error"} onClick={onRejectClick}>Отклонить</Button>
+                    </div>
+                    : null
+            }
+
         </div>
     );
 };

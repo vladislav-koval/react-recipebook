@@ -14,10 +14,10 @@ class RecipeService {
             })
     };
 
-    getRecipeList() {
+    getRecipeList(type) {
         return axios.get(RECIPE_LIST_URL, {
             params: {
-                type: 'not-approved'
+                type: type
             }
         })
             .then(response => {

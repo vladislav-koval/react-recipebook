@@ -122,7 +122,12 @@ class Profile extends Component {
                         </div>
                     </div>
                     <div className={classes.profileButtons}>
-                        <Button type={"dark"} disabled={this.state.isEditing}>Мои рецепты</Button>
+                        <Button to={"/recipe-list/my-recipes"}
+                                type={"dark"}
+                                disabled={this.state.isEditing}
+                                tag={NavLink}>
+                            Мои рецепты
+                        </Button>
                         {this.state.isEditing ?
                             <div className={classes.profileEditButtons}>
                                 <Button type={"error"} onClick={this.onRejectEditClicked}>Отмена</Button>
@@ -136,7 +141,7 @@ class Profile extends Component {
                             Добавить рецепт
                         </Button>
                         {this.state.isAdmin ?
-                            <Button to={"/recipe-list"}
+                            <Button to={"/recipe-list/not-approved"}
                                     type={"dark"}
                                     disabled={this.state.isEditing}
                                     tag={NavLink}>

@@ -4,15 +4,20 @@ import {NavLink} from "react-router-dom";
 import RecipeItemList from "../../components/RecipeItemList/RecipeItemList";
 import Loader from "../../components/UI/Loader/Loader";
 import RecipeService from "../../service/recipeService";
+import AuthService from "../../service/authService";
 
 class RecipeList extends Component {
     state = {
         recipes: null,
-        loading: true
+        loading: true,
+
+        type: this.props.match.params.type,
+        isAdmin: AuthService.isAdmin(),
+        showConfirmButtons: false
     };
 
     componentDidMount() {
-        RecipeService.getRecipeList()
+        RecipeService.getRecipeList(this.state.type)
             .then(data => {
                 let recipes;
                 if (data) {
@@ -22,7 +27,8 @@ class RecipeList extends Component {
                 } else {
                     recipes = [];
                 }
-                this.setState({recipes, loading: false});
+                const showConfirmButtons = this.state.type === 'not-approved' && this.state.isAdmin;
+                this.setState({recipes, loading: false, showConfirmButtons});
             })
             .catch(error => console.log("errrr", error.message));
     }
@@ -33,7 +39,7 @@ class RecipeList extends Component {
                 return (
                     <li key={recipe.id} className={classes.RecipeItem}>
                         <NavLink to={'/recipe/' + recipe.id}>
-                            <RecipeItemList recipe={recipe}/>
+                            <RecipeItemList showConfirmButtons={this.state.showConfirmButtons} recipe={recipe}/>
                         </NavLink>
                     </li>
                 );
