@@ -39,11 +39,11 @@ const RecipeItemList = props => {
 
             </div>
 
-            {
+            {props.type === "my-recipes" && props.recipe.is_approved === 0 ?
                 <div className={classes.status}>
-                    {props.type === "my-recipes" && props.recipe.is_approved === 0 ?
-                        "Ожидает одобрения" : null}
+                    Ожидает одобрения
                 </div>
+                : null
             }
 
         </div>

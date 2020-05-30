@@ -6,7 +6,7 @@ class ImagesService {
     uploadAvatar(file, login, imageName) {
 
         const fd = new FormData();
-        fd.append("file", file);
+        fd.append("avatar", file);
         fd.append("login", login);
         fd.append("imageName", imageName);
         return axios.post(UPLOAD_AVATAR_URL, fd, {
