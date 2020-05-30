@@ -1,14 +1,29 @@
 .avatarInner {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   img {
-    max-width: 212px;
-    max-height: 212px;
-    width: 100%;
-    height: 100%;
+    width: 212px;
+    height: 212px;
     object-fit: cover;
 
-    margin-bottom: 15px;
+    margin-bottom: 8px;
+  }
+
+  .inputFile {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+
+    &:hover {
+      color: #8ce7ff;
+    }
   }
 }

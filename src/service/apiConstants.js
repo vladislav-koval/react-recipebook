@@ -9,6 +9,8 @@ export const RECIPE_LIST_BY_CATEGORY_URL = `${API_URL}/get-category`;
 export const RECIPE_URL = `${API_URL}/get-recipe`;
 export const RECIPE_MARK_URL = `${API_URL}/mark-recipe`;
 
+export const UPLOAD_AVATAR_URL = `${API_URL}/upload-avatar`;
+
 export const USER_NAME_SESSION_ATTRIBUTE_ADMIN_MARKER = 'isAdmin';
 export const USER_NAME_SESSION_ATTRIBUTE_TOKEN = 'token';
 export const USER_NAME_SESSION_ATTRIBUTE_PROFILE = 'profile';

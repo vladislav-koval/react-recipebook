@@ -13,6 +13,7 @@ class Profile extends Component {
         login: "",
         name: "",
         surname: "",
+        avatar: "",
         rating: 100,
         isAdmin: AuthService.isAdmin(),
 
@@ -105,7 +106,7 @@ class Profile extends Component {
             <div className="container">
                 <div className={classes.Profile}>
                     <div className={classes.ProfileInner}>
-                        <Avatar edited={true}/>
+                        <Avatar edited={this.state.isEditing}/>
                         <div className={classes.infoInner}>
                             {this.state.isEditing ? this.renderInputs() :
                                 <Fragment>
