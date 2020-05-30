@@ -2,12 +2,17 @@ import React, {Component, Fragment} from "react";
 import classes from "./Avatar.module.scss";
 import avatar from "../../../assets/img/photo.png";
 import ImagesService from "../../../service/imagesService";
+import ProfileService from "../../../service/profileService";
 
 class Avatar extends Component {
     state = {
         file: '',
         imagePreviewUrl: ''
     };
+
+    componentDidMount() {
+        /*TODO: set imagePreviewUrl*/
+    }
 
     handleImageChange = (e) => {
         e.preventDefault();
@@ -21,10 +26,11 @@ class Avatar extends Component {
                 imagePreviewUrl: reader.result
             });
         };
-
+        let login = ProfileService.getUserLogin();
         reader.readAsDataURL(file);
-        console.log("file", reader);
-        ImagesService.uploadAvatar(file, "lall", file.name).then(data => console.log(data)).catch(error => console.log(error))
+        ImagesService.uploadAvatar(file, login, file.name)
+            .then(data => console.log("fileRes", data))
+            .catch(error => console.log("err", error))
     };
 
     render() {
