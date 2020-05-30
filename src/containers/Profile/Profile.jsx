@@ -36,8 +36,7 @@ class Profile extends Component {
         let login = ProfileService.getUserLogin();
         let name = ProfileService.getUserName();
         let surname = ProfileService.getUserSurname();
-        // let avatar = ProfileService.getUserAvatar();
-        let avatar = "http://localhost:8080/avatar/123.jpg";
+        let avatar = ProfileService.getUserAvatar();
         // let rating = ProfileService.getUserRating();
         this.setState({
             login,
@@ -102,7 +101,11 @@ class Profile extends Component {
         let login = ProfileService.getUserLogin();
         reader.readAsDataURL(file);
         ImagesService.uploadAvatar(file, login, file.name)
-            .then(data => console.log("fileRes", data))
+            .then(data => {
+                console.log("fileRes", data);
+                const avatar = ProfileService.getUserAvatar();
+                this.setState({avatar});
+            })
             .catch(error => console.log("err", error))
     };
 

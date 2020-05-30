@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {UPLOAD_AVATAR_URL} from "./apiConstants";
+import {UPLOAD_AVATAR_URL, USER_NAME_SESSION_ATTRIBUTE_AVATAR} from "./apiConstants";
 
 
 class ImagesService {
@@ -17,10 +17,17 @@ class ImagesService {
             .then(response => {
                 return response.data;
             })
-            .then(data => data)
+            .then(data => {
+                this.setProfileAvatarToLocalStorage(data.avatar);
+                return data;
+            })
             .catch(error => {
                 throw new Error(error.response.data.error);
             });
+    }
+
+    setProfileAvatarToLocalStorage(imageName) {
+        localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_AVATAR, imageName);
     }
 }
 

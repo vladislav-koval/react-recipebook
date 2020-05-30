@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
     EDIT_PROFILE_URL,
+    PATH_TO_AVATAR_URL,
     PROFILE_URL,
     USER_NAME_SESSION_ATTRIBUTE_AVATAR,
     USER_NAME_SESSION_ATTRIBUTE_LOGIN,
@@ -52,7 +53,9 @@ class ProfileService {
     getUserLogin = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_LOGIN);
     getUserName = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
     getUserSurname = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_SURNAME);
-    getUserAvatar = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_AVATAR);
+    getUserAvatar = () => {
+        return `${PATH_TO_AVATAR_URL}/${localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_AVATAR)}`;
+    };
     getUserRating = () => localStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_RATING);
 }
 

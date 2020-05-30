@@ -19,3 +19,6 @@ export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'userName';
 export const USER_NAME_SESSION_ATTRIBUTE_SURNAME = 'userSurname';
 export const USER_NAME_SESSION_ATTRIBUTE_AVATAR = "userAvatar";
 export const USER_NAME_SESSION_ATTRIBUTE_RATING = "userRating";
+
+
+export const PATH_TO_AVATAR_URL = `${API_URL}/avatar`;
