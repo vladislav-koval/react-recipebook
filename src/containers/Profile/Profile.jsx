@@ -7,6 +7,7 @@ import Input from "../../components/UI/Input/Input";
 import {getProfileControls, onChangeHandler} from "../../form/formService";
 import {NavLink} from "react-router-dom";
 import Avatar from "../../components/UI/Avatar/Avatar";
+import ImagesService from "../../service/imagesService";
 
 class Profile extends Component {
     state = {
@@ -31,13 +32,19 @@ class Profile extends Component {
     }
 
     setProfileData() {
+        /*TODO: remove comments after realise avatar and rating*/
         let login = ProfileService.getUserLogin();
         let name = ProfileService.getUserName();
         let surname = ProfileService.getUserSurname();
+        // let avatar = ProfileService.getUserAvatar();
+        let avatar = "http://localhost:8080/avatar/123.jpg";
+        // let rating = ProfileService.getUserRating();
         this.setState({
             login,
             name,
-            surname
+            surname,
+            avatar,
+            // rating
         });
     };
 
@@ -48,7 +55,6 @@ class Profile extends Component {
         formControls.surname.value = this.state.surname;
 
         this.setState({formControls, isEditing: true});
-        console.log(this.state.formControls);
     };
 
     onRejectEditClicked = () => {
@@ -81,6 +87,25 @@ class Profile extends Component {
             this.state.surname === formControls.surname.value;
     };
 
+    onChangeAvatar = (e) => {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        };
+        let login = ProfileService.getUserLogin();
+        reader.readAsDataURL(file);
+        ImagesService.uploadAvatar(file, login, file.name)
+            .then(data => console.log("fileRes", data))
+            .catch(error => console.log("err", error))
+    };
+
     renderInputs() {
         return Object.keys(this.state.formControls).map((controlName, index) => {
             const control = this.state.formControls[controlName];
@@ -106,7 +131,7 @@ class Profile extends Component {
             <div className="container">
                 <div className={classes.Profile}>
                     <div className={classes.ProfileInner}>
-                        <Avatar edited={this.state.isEditing}/>
+                        <Avatar onChange={this.onChangeAvatar} src={this.state.avatar} edited={this.state.isEditing}/>
                         <div className={classes.infoInner}>
                             {this.state.isEditing ? this.renderInputs() :
                                 <Fragment>

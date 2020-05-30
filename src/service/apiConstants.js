@@ -17,3 +17,5 @@ export const USER_NAME_SESSION_ATTRIBUTE_PROFILE = 'profile';
 export const USER_NAME_SESSION_ATTRIBUTE_LOGIN = 'userLogin';
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'userName';
 export const USER_NAME_SESSION_ATTRIBUTE_SURNAME = 'userSurname';
+export const USER_NAME_SESSION_ATTRIBUTE_AVATAR = "userAvatar";
+export const USER_NAME_SESSION_ATTRIBUTE_RATING = "userRating";
