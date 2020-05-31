@@ -82,6 +82,21 @@
     margin: 15px 0;
   }
 
+  &.nav {
+    box-shadow: none;
+    background: none;
+    color: #fff;
+    font-size: 22px;
+
+    &:hover {
+      color: #8ce7ff;
+    }
+
+    &.active {
+      color: #8ce7ff;
+    }
+  }
+
   &:disabled,
   &.disabled {
     pointer-events: none;

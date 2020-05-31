@@ -9,6 +9,9 @@ const Button = props => {
     if (props.disabled) {
         cls.push(classes.disabled);
     }
+    if(props.active) {
+        cls.push(classes.active);
+    }
     const TagName = props.tag ? props.tag : "button";
     return (
         <TagName
