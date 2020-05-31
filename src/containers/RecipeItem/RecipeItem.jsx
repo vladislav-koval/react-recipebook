@@ -25,7 +25,6 @@ class RecipeItem extends Component {
 
 
     componentDidMount() {
-        console.log(this.props);
         RecipeService.getRecipe(this.state.id)
             .then(data => {
                 const response = data[0];
@@ -118,7 +117,7 @@ class RecipeItem extends Component {
                             <Fragment>
                                 <div className={classes.RecipeItemInner}>
 
-                                    <Avatar edited={false}/>
+                                    <Avatar src={this.state.recipe.picture} edited={false}/>
                                     <div className={classes.recipeTopLeftBlock}>
                                         <h2>
                                             {this.state.recipe.title}
