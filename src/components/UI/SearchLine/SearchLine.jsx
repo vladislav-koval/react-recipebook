@@ -9,13 +9,17 @@ class SearchLine extends Component{
     };
 
     onChangeSearchHandler = (e) => {
-        const searchValue = e.target.value.trim();
+        const searchValue = e.target.value;
         this.setState({searchValue});
     };
 
     onClickSearchHandler = (e) => {
-        if(this.state.searchValue === "") {
+        const {searchValue} = this.state;
+        if(searchValue.trim() === "") {
             e.preventDefault();
+            this.setState({searchValue: searchValue.trim()})
+        } else {
+            this.setState({searchValue: ""})
         }
     };
 
@@ -26,7 +30,7 @@ class SearchLine extends Component{
                        onChange={this.onChangeSearchHandler}
                        value={this.state.searchValue}
                 />
-                <NavLink onClick={this.onClickSearchHandler} className={(!this.state.searchValue ? classes.disabled : "")} to={"/search/" + this.state.searchValue}>
+                <NavLink onClick={this.onClickSearchHandler} className={(!this.state.searchValue ? classes.disabled : "")} to={"/search/" + this.state.searchValue.trim()}>
                     <button disabled={!this.state.searchValue}/>
                 </NavLink>
             </div>
