@@ -17,6 +17,7 @@ class App extends Component {
                     <Route path="/recipeCreator" component={RecipeCreator}/>
                     <Route path="/recipe-list/:type" component={RecipeList}/>
                     <Route path="/category/:category" component={RecipeList}/>
+                    <Route path="/search/:search" component={RecipeList}/>
                     <Route path="/recipe/:id" component={RecipeItem}/>
                 </Switch>
             </Layout>

@@ -15,6 +15,7 @@ class RecipeList extends Component {
         listCriterion: {
             type: this.props.match.params.type,
             category: this.props.match.params.category,
+            search: this.props.match.params.search
         },
         filteredBy: "id",
     };

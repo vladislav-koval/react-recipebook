@@ -6,6 +6,7 @@ export const EDIT_PROFILE_URL = `${PROFILE_URL}/edit`;
 export const RECIPE_PUBLICATION_URL = `${API_URL}/recipe-public`;
 export const RECIPE_LIST_BY_TYPE_URL = `${API_URL}/recipe-list`;
 export const RECIPE_LIST_BY_CATEGORY_URL = `${API_URL}/get-category`;
+export const RECIPE_LIST_BY_SEARCH_URL = `${API_URL}/get-search-list`;
 export const RECIPE_URL = `${API_URL}/get-recipe`;
 export const RECIPE_MARK_URL = `${API_URL}/mark-recipe`;
 

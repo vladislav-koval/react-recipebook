@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from "react";
 import logo from "../../assets/img/logo.png"
 import {NavLink} from "react-router-dom";
+import SearchLine from "../../components/UI/SearchLine/SearchLine";
 
 class Header extends Component {
 
@@ -41,7 +42,8 @@ class Header extends Component {
                         <nav className="main-nav">
                             <ul className="site-navigation">
                                 <li className="site-navigation__item">
-                                    <NavLink to={"/search"} className="site-navigation__link">Поиск рецепта</NavLink>
+                                    <SearchLine/>
+                                    {/*<NavLink to={"/search"} className="site-navigation__link">Поиск рецепта</NavLink>*/}
                                 </li>
                             </ul>
                             <ul className="user-list">
