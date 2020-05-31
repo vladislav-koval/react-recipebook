@@ -7,6 +7,8 @@ import AuthService from "../../service/authService";
 import Confirmation from "../../components/Popups/Confirmation/Confirmation";
 import RecipeService from "../../service/recipeService";
 import {getRecipeCategories} from "../../form/formService";
+import ProfileService from "../../service/profileService";
+import RatingService from "../../service/ratingService";
 
 class RecipeItem extends Component {
 
@@ -82,6 +84,21 @@ class RecipeItem extends Component {
         return <div>{"Категория: " + recipeCategory.value}</div>
     }
 
+    onLikeHandler = () => {
+        const {recipe} = this.state;
+        const login = ProfileService.getUserLogin();
+        if (recipe.vote) {
+            recipe.vote = 0;
+            recipe.rating--;
+            RatingService.toDislikeRecipe(login, recipe.id);
+        } else {
+            recipe.vote = 1;
+            recipe.rating++;
+            RatingService.toLikeRecipe(login, recipe.id);
+        }
+        this.setState({recipe})
+    };
+
     render() {
 
         return (
@@ -115,7 +132,8 @@ class RecipeItem extends Component {
 
                                     <div className={classes.recipeTopRightBlock}>
                                         <div>Автор: {this.state.recipe.author}</div>
-                                        <div className={classes.rating}>
+                                        <div onClick={this.onLikeHandler}
+                                             className={classes.rating + " " + (this.state.recipe.vote ? classes.rated : "")}>
                                             <span className={classes.counter}>{this.state.recipe.rating}</span>
                                         </div>
                                     </div>

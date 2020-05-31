@@ -16,6 +16,7 @@ function renderIngredients(ingredients) {
 const RecipeItemList = props => {
     const categories = getRecipeCategories();
     const recipeCategory = categories.find(item => item.key === props.recipe.category);
+    console.log("RECIPEITEMLIST", props);
     return (
         <div className={classes.Recipe}>
             <div className={classes.leftBlock}>
@@ -42,8 +43,10 @@ const RecipeItemList = props => {
             {props.type === "my-recipes" && props.recipe.is_approved === 0 ?
                 <div className={classes.status}>
                     Ожидает одобрения
+                </div> :
+                <div className={classes.rating}>
+                    Рейтинг: {props.recipe.rating}
                 </div>
-                : null
             }
 
         </div>

@@ -11,6 +11,9 @@ export const RECIPE_MARK_URL = `${API_URL}/mark-recipe`;
 
 export const UPLOAD_AVATAR_URL = `${API_URL}/upload-avatar`;
 
+export const TO_LIKE_RECIPE_URL = `${API_URL}/to-rate`;
+export const TO_DISLIKE_RECIPE_URL = `${API_URL}/remove-rate`;
+
 export const USER_NAME_SESSION_ATTRIBUTE_ADMIN_MARKER = 'isAdmin';
 export const USER_NAME_SESSION_ATTRIBUTE_TOKEN = 'token';
 export const USER_NAME_SESSION_ATTRIBUTE_PROFILE = 'profile';
