@@ -23,11 +23,12 @@ class ProfileService {
     }
 
     setProfileDataToLocalStorage(data) {
+        console.log("DAATA", data);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_LOGIN, data.username);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_PROFILE, data.username);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, data.name);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_SURNAME, data.surname);
-        localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_AVATAR, data.avatar);
+        localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_AVATAR, data.file_name);
         localStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_RATING, data.rating);
     }
 

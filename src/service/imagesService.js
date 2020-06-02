@@ -18,7 +18,8 @@ class ImagesService {
                 return response.data;
             })
             .then(data => {
-                this.setProfileAvatarToLocalStorage(data.avatar);
+                this.setProfileAvatarToLocalStorage(data);
+                window.location.reload();
                 return data;
             })
             .catch(error => {

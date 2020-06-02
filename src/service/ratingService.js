@@ -3,7 +3,7 @@ import {TO_DISLIKE_RECIPE_URL, TO_LIKE_RECIPE_URL} from "./apiConstants";
 
 class RatingService {
     toLikeRecipe(login, idRecipe) {
-        axios.post(TO_LIKE_RECIPE_URL, login, idRecipe)
+        axios.post(TO_LIKE_RECIPE_URL, {login, idRecipe})
             .then(response => {
                 return response.data;
             })
@@ -14,7 +14,7 @@ class RatingService {
     }
 
     toDislikeRecipe(login, idRecipe) {
-        axios.post(TO_DISLIKE_RECIPE_URL, login, idRecipe)
+        axios.post(TO_DISLIKE_RECIPE_URL, {login, idRecipe})
             .then(response => {
                 return response.data;
             })

@@ -15,7 +15,7 @@ class Profile extends Component {
         name: "",
         surname: "",
         avatar: "",
-        rating: 100,
+        rating: 0,
         isAdmin: AuthService.isAdmin(),
 
         isEditing: false,
@@ -24,26 +24,25 @@ class Profile extends Component {
     };
 
     componentDidMount() {
-        if (!ProfileService.profileIsExists()) {
+        // if (!ProfileService.profileIsExists()) {
             ProfileService.setProfileDataFromServer().then(() => this.setProfileData());
-        } else {
-            this.setProfileData();
-        }
+        // } else {
+        //     this.setProfileData();
+        // }
     }
 
     setProfileData() {
-        /*TODO: remove comments after realise avatar and rating*/
         let login = ProfileService.getUserLogin();
         let name = ProfileService.getUserName();
         let surname = ProfileService.getUserSurname();
         let avatar = ProfileService.getUserAvatar();
-        // let rating = ProfileService.getUserRating();
+        let rating = ProfileService.getUserRating();
         this.setState({
             login,
             name,
             surname,
             avatar,
-            // rating
+            rating
         });
     };
 
